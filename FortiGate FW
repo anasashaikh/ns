@@ -41,5 +41,7 @@ Use in block policy to block all incoming traffic except VIPs, set to disalbe
 #set match-vip <enable \ disable>
 #next
 #end
------------------------------------------------------------------------------------
+------------------------Testing LDAP & RADIUS QUERY on CLI-----------------------------------------------------------
+#diaganose test authserver ldap <server_name user_name password>
 
+#diaganose test authserver radius <server_name scheme user_name password>
