@@ -10,6 +10,24 @@ Fortigate(interface)# edit port1
 Fortigate(port1)# set mode static    to set as static from dynmic
 Fortigate(port1)# set ip 172.16.5.19 255.255.255.0
 
+----------------------------------------------------Ping------------------------------------------------------------
+Set the source IP/interface:
+#execute ping-options source 172.16.5.215
+#execute ping 172.16.5.16
+
+Set the number of ping packets:
+#execute ping-options repeat-count 5
+
+Set packet size
+execute ping-options data-size 1400
+
+
+View current ping options:
+#execute ping-options view-settings
+
+Reset ping options to default:
+#execute ping-options reset
+
 ---------------------------------Routing-----------------------------------------------
 #get router info routing-table all                          To see routing table
 
