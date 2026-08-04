@@ -63,3 +63,14 @@ Use in block policy to block all incoming traffic except VIPs, set to disalbe
 #diaganose test authserver ldap <server_name user_name password>
 
 #diaganose test authserver radius <server_name scheme user_name password>
+
+----------------------------------------------------------------------------------------
+To troubleshoot further common antivirus issues, you can check the information provided by the following commands:
+
+•get system performance status: Displays statistics for the last one minute.
+
+•diagnose antivirus database-info: Displays current antivirus database information.
+
+•diagnose autoupdate versions: Displays current antivirus engine and signature versions.
+
+•diagnose antivirus test "get scantime": Displays scan times for infected files.
