@@ -33,11 +33,12 @@ Reset ping options to default:
 
 
 -------------------------------------------------------------------------------------------------
+#diaganose debug rating                     To verify the connection to fortiguard servers
 #diagonose autoupdate versions              Fortiguard databases/engines installed
 
 #config log disk setting                    To enable disk loggin
 set status enable
-set maximum-log-age <Int>                        By default, logs older than seven days are deleted from the disk. This value is configurable.
+set maximum-log-age <Int>                    By default, logs older than seven days are deleted from the disk. This value is configurable.
 
 
 -----------------------Fortianalyzer logging------------------------------------------------
