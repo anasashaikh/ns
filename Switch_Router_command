@@ -310,8 +310,12 @@ DHCP SERVER Configuration
 #lease (0-365) 0=24 hours/1day, we can select "infinite" to assing ip permanently.
 #ip dhcp excluded-address 192.168.100.100 //dhcp server will not assign this ip to any client.
 
+When dhcp is in diff network
+1. open interface of router(default gateway) which receives the Discover packet from clients
+2. enter below command with the ip of dhcp server
+#IP Helper-address 172.16.10.5(ip of dhcp server) // when dhcp is in another network
+
 #ip address dhcp // to assign ip from dhcp to the cisco router working as pc. 
-open interface do no shut and write this command.
 #ip dhcp // to assing ip form dhcp in VPC.
 
 #show ip dhcp binding  //to see binding table of dhcp server.
