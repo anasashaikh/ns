@@ -141,6 +141,8 @@ ip routing
 interface vlan 200                  //create a logical vlan interface which will be the gateway for that vlan hosts.
 ip address 192.168.0.1 255.255.255.0
 ---------------------------------------------STP----------------------------------------------------------------------
+Control interfaces of Switch, Break the loop
+
 STP SPANING TREE PROTOCOL   INVENTED BY (RADIA PERLMAN ) OPEN SOURCE 
 STP SPANNING TREE PROTOCOL (by cisco)		802.1D 
 RSTP RAPID SPANNING TREE PROTOCOL IEEE  	802.1W 
@@ -197,21 +199,35 @@ STP 5 states: Total time 50s
 4 learning    15s - Sw read the received bpdu packet and do election for root bridge, root port and block port
 5 forwarding  20s - Based on the election in learning state conclusion is made and root bridge is decided, port is up now. 
 ------------------------------------STP end ---------------------------------------------------------------
-cisco device port fast
-interface fasternet 0/2
-spanning-tree portfast
+PORT FAST BY cisco: woks in cisco device only, in other vendors we dont need port fast.
 
+What is the need of port fast, when switch are connected they run STP, but when PC is connected with switch
+we dont need STP there hence to reduce time of STP config we eleminate STP process whech pCs are connected with switches
+this process is called port fast.
+PCs dont need BPDU packets.
 
-RSTP IEEE
+#interface fasternet 0/2
+#spanning-tree portfast
+#Exit
+-------------------------------RSTP---------------------------------------------------------
+Works same as STP but it is faster then STP and open source.
+3 states of RSTP: 30 secs
 1 DISCARD      2sec
 2 LEARNING     15s
 3 FORWARDING   5s - 15s
 
-----------------------------------------------------
-PVSTP 
+--------------------------------PVSTP & RPVSTP--------------------------------------------------
+PVSTP: Per VLAN STP: it is introduced to remove the pressure of single root bridge, works in cisco.
+In this we can create multiple root bridges to handle the data of multiple vlans, it is kind of load balancing.
+
+SW2 for vlan 10 
 SPANNING-TREE MODE RAPID-PVST
-SPANNIGN-TREE VLAN 20 ROOT PRIMARY 
-SPANNIG-TREE VLAN 10 ROOT SECONDARY 
+SPANNIGN-TREE VLAN 10 ROOT PRIMARY
+
+SW3 for vlan 20
+SPANNING-TREE MODE RAPID-PVST
+SPANNIGN-TREE VLAN 20 ROOT PRIMARY
+SPANNIG-TREE VLAN 10 ROOT SECONDARY //if sw2 fails then sw3 will become root bridge for vlan 10 
 ------------------------------------------------Router commands------------------------
 
 1. TO select interface of router		interface ethernet 0/0
