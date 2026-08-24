@@ -1,40 +1,40 @@
 Switch Modes >(user mode)
 #(previledge mode)
-COMMANDS
 #to truobleshoot the network			tracert (IP)/facebook.com
-#VirtualPC (lower case only)
+
+---------------------------------------Commands for VirtualPC (lower case only)---------------------------------------
 
 1. To check IP Address				show ip
 2. To set IP Address				ip 192.168.50.1/24 or 255.255.255.0 after this we add gateway (ip 192.168.100.1/24 192.168.100.254)
 3. To change PC name				set pcname pc-1
 4.  To save configuration of vpc		save
 5. to trace a route 				trace 192.168.100.20 (ip of destination device)-tracert(for real device)
---------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------------VPC END-----------------------------------------------------------
 
-#Switch Virtual & Physical both (Not-case Sensitive)		common commands
+----------------------------------------------Switch commands (Not-case Sensitive) -----------------------------------------
 
-1.  To know each command in User Mode of switch 	?
-2.  To get access of Privilege mode			Enable
-3.  To check number of ports/ports config		Show IP Interface brief
-4.  To see mac-address table 				Show Mac Address-table
-5. To check and config specific ethernet port		Show interface Ethernet 0/0
-6. To check running config				show running-config
-7. To check Vlan table					show vlan / vlan brief
-7. to save configuration in previledge mode		write memory
+To know each command in User Mode of switch 		?
+To get access of Privilege mode				Enable
+To check number of ports/ports config			Show IP Interface brief
+To see mac-address table 				Show Mac Address-table
+To check and config specific ethernet port		Show interface Ethernet 0/0
+To check running config					show running-config
+To check Vlan table					show vlan / vlan brief
+to save configuration in previledge mode		write memory
 
 To erase all configuration of sw			write erase (after this cmd reboot device "restart" is mandatory select "No" after restart)
-8. To change baud rate of switch 			line console 0
-											speed 9600
-To see flash memory						show flash
-To delete file from flash memory		delete flash: vlan.dat(file name)
---------------------------------------------------------------------------------------------------------------------
+To change baud rate of switch 				line console 0
+							speed 9600
+To see flash memory					show flash
+To delete file from flash memory			delete flash: vlan.dat(file name)
 
-#Commands for Vlan
 
-To Create VLAN				Vlan 10 (vlan any number)
-					name IT(give any name)
-					switchport mode access		access port(only data of single vlan can pass through this port)
-					switchport access Vlan 10	(only vlan 10 can pass through this port)
+-----------------------------------------VLAN---------------------------------------------------------------------------
+
+Vlan 10 (vlan any number)
+name IT(give any name)
+switchport mode access		access port(only data of single vlan can pass through this port)
+switchport access Vlan 10	(only vlan 10 can pass through this port)
 
 To remove VLAN				No VLAN 10
 TO get back interface of removed vlan	default interface 0/1
