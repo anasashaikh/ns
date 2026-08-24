@@ -3,32 +3,30 @@ Switch Modes >(user mode)
 #to truobleshoot the network			tracert (IP)/facebook.com
 
 ---------------------------------------Commands for VirtualPC (lower case only)---------------------------------------
-
-1. To check IP Address				show ip
-2. To set IP Address				ip 192.168.50.1/24 or 255.255.255.0 after this we add gateway (ip 192.168.100.1/24 192.168.100.254)
-3. To change PC name				set pcname pc-1
-4.  To save configuration of vpc		save
-5. to trace a route 				trace 192.168.100.20 (ip of destination device)-tracert(for real device)
+show ip										To check IP Address
+ip 192.168.50.1/24 or 255.255.255.0 192.168.100.254 (IP SUBNET GATEWAY)		TO SET IP
+set pcname pc-1									To change PC name
+save										To save configuration of VPC
+trace 192.168.100.20 (IP of destination device)					To trace a route (tracert for real device)
 ---------------------------------------------------------VPC END-----------------------------------------------------------
-
+switch send  bpdu packet to identify switchs in the network--Bridge Protocol Data Unit
+switch share mac address table  with other switchs. 
 ----------------------------------------------Switch commands (Not-case Sensitive) -----------------------------------------
-
-To know each command in User Mode of switch 		?
-To get access of Privilege mode				Enable
-To check number of ports/ports config			Show IP Interface brief
-To see mac-address table 				Show Mac Address-table
-To check and config specific ethernet port		Show interface Ethernet 0/0
-To check running config					show running-config
-To check Vlan table					show vlan / vlan brief
-to save configuration in previledge mode		write memory
-
-To erase all configuration of sw			write erase (after this cmd reboot device "restart" is mandatory select "No" after restart)
-To change baud rate of switch 				line console 0
-							speed 9600
-To see flash memory					show flash
-To delete file from flash memory			delete flash: vlan.dat(file name)
-
-
+?				To know each command in User Mode of switch
+Enable				To get access of Privilege mode
+Show IP Interface brief		To check number of ports/ports config
+Show Mac Address-table		To see mac-address table
+Show interface Ethernet 0/0	To check and config specific ethernet port
+show running-config		To check running config
+show vlan / vlan brief		To check Vlan table
+write memory			To save configuration in previledge mode
+write erase 			To erase all configuration of sw
+(after this cmd reboot device "restart" is mandatory select "No" after restart)
+line console 0
+speed 9600			To change baud rate of switch
+show flash			To see flash memory
+delete flash: vlan.dat(file name)	To delete file from flash memory
+RELOAD				To reboot
 -----------------------------------------VLAN---------------------------------------------------------------------------
 
 Vlan 10 (vlan any number)
@@ -43,39 +41,106 @@ TO get back interface of removed vlan	default interface 0/1
 
 CMD for Trunk
 
-1. Select interface of SW		switchport trunk encapsulation dot1q/ISL(For Cisco SWs only)
-								switchport mode trunk
+Select interface of SW		switchport trunk encapsulation dot1q/ISL(For Cisco SWs only)
+				switchport mode trunk
 
-8. To see trunk table			show interfaces trunk 
+To see trunk table		show interfaces trunk 
 ---------------------------------------------------------------------------------------------------------
----> CMD for VTP (virtual trunking protocol) VTP-ser VTP-Cli
+VTP (virtual trunking protocol) VTP-ser VTP-Cli
+--->To create VTP Ser
+VTP mode server	
+VTP domain CCN
+VTP password CCN@123
 
-To create VTP Ser			VTP mode server	
-					VTP domain CCN
-					VTP password CCN@123
-
-To Create VTP Client			VTP mode client
-					vtp domain CCN
-					vtp password CCN@123
+--->To Create VTP Client			
+VTP mode client
+vtp domain CCN
+vtp password CCN@123
 --------------------------------------------------------------------------------------------------------------
 DTP(Dynamic Trunking Protocol)
-Commands
+
 #select interface
 #switchport trunk encapsulation negotiate	
 #switchport mode dynamic desirable/auto		dynamic - interface will trunk with the same method as connected interface of sw
 ---------------------------------------------------------------------------------------------------------------
 
-CDP/LLDP
+CDP (cisco discovery protocol) /LLDP link layer discovery protocol LLDP (IEEE 802.1AB) only network devices 
 
 #Show CDP neighbours			To check CDP Table
-#No CDP Run				To disable CDP
-#No LLDP Run				To disable LLDP
+#show lldp neighbors
+#No CDP/LLDP Run			To disable CDP/LLDP
+#CDP/LLDP Run				TO enable CDP/LLDP
 
-#CDP Run				TO enable CDP/LLDP
+both run on same time cdp & lldp
 
+#Default times
+cdp advertisement  packet    timer 60s   holdtime 180s 3min  to remove that data 
+lldp advertisement  packet   timer 30s   holdtime 120s 2min  to remove that data
+
+Hold time should always be more than advertisement time.
+
+cdp timer ? 5-254
+cdp timer 100
+cdp holdtime 200
+
+lldp timer ? 5-65534
+lldp timer 100
+lldp holdtime 200
+
+------------------------------------------------ETHER-CHANNEL -------------------------------------------------------------------
+It is use too increase the speed by combining interfaces 
+https://media.geeksforgeeks.org/wp-content/uploads/ethe1r.png
+
+#RULES OF MAKING ETHER-CHANNEL 
+
+MAX port channel in PAGP CISCO & IEEE 128 
+IEEE 802.3AD LACP
+
+1 BOTH SIDE CONFIG ETHER-CHANNEL 
+
+2 SW TO SER /SW TO SW/ SW TO R / R TO R 
+
+3 PORT-CHANNEL-->MULTI PORT COMBINE   PROCESS NAME (PAGP)Port Aggregation Protocol(CISCO ) //(LACP)Link Aggregation Control Protocol (IEEE)
+
+4 SAME TYPE OF INTERFACE (GI TO GI /FA TO FA)
+
+5 BOTTLE NECK (high to low  LOW TO HIGHT)
+
+6 PAGP TO PAGP || LACP TO LACP 
+
+7 PAGP MAX 8 INTERFACE || LACP MAX 16 INTERFACE 
+
+8 PAGP 8 ACTIVE PORT  ||  LACP 8 ACTIVE 8 STAND BY (BACKUP)
+
+9 PORT CHANNEL MAX 128 LACP & PAGP 
+
+10 down by itself if its find opposite   down
+
+LACP METHOD = ACTIVE / PASSIVE
+PAGP METHOD = AUTO / DESIRABLE
+
+--------------------------------CONFIG------------------------------------
+interface range ethernet 0/0, ethernet 0/1		Select interfaces
+channel-group 1  mode  ACTIVE   //(max 255)
+EXIT
+
+show interface port-channel 1
+show etherchannel summary
+
+Can TRUNK a port channel 
+interface port-channel  1 
+switchport trunk encapsulation dot1Q
+switchport mode trunk
+
+--------------------------------------------IVR ------------------------------------------------------------------
+Works in L3 switch
+
+interface fa 0/0 
+no shutdown 
+ip routing 
+interface vlan 200                  //create a logical vlan interface which will be the gateway for that vlan hosts.
+ip address 192.168.0.1 255.255.255.0
 -------------------------------------------------------------------------------------------------------------------
-
-
 Router commands
 
 1. TO select interface of router		interface ethernet 0/0
