@@ -144,69 +144,45 @@ ip address 192.168.0.1 255.255.255.0
 STP SPANING TREE PROTOCOL   INVENTED BY (RADIA PERLMAN ) OPEN SOURCE 
 CISCO STP 802.1D SPANNING TREE PROTOCOL
 IEEE  802.1W RSTP RAPID SPANNING TREE PROTOCOL 
---------------------------------------
-
+-------------------------------------
 
 BPDU EVERY 2 SEC SHARE NON-changeable 
 
 BPDU DATA SIZE 8 BYTES 
 6 MAC 2  STP PRIORITY
 
-STORTCUT
-STAGE 1 MAI ROOT BRIDGE SELECTION HOTA HAI ELECTION VIA 1st ELECTION MAI STP PRIORITY 32768+VLAN  2nd election base mac address 
--------------------------------------------------------------------------------------------------------------------------------
-stage 1 main switch----->-root bridge (RB)   sw 2 rb   ==>root bridge
-1st election for root brudge rb--->  lowest value stp priority  32768 + vlan no100 (32768+100=32868)
-2nd election mac address lowest mac address values to win (switch have base mac address compare  stp )
+STP working process
+
+STAGE 1: Election to make Root Bridge (RB)
+1st Election on basis of STP priority 32768+VLAN ID 100 (32868)
+2nd election on base of mac address (if 1st election ties/fails)
+*Lowest value wins the election.
 root bridge sab packet root bridge pe jayegay  (all packet goes to rb)
-dp jo port by default chalu raheta hai wo hai dp 
+
+DP = designated port, all ports of Root Bridge are DP, their condition is forwarding.
 show version 
-MAC
-1
-2
-3
-4
-5
-6
-7
-8
-9
-10A
-11B
-12C
-13D
-14E
-15F
+
+MAC Add: 1 2 3 4 5 6 7 8 9 A B C D E F
 0000 = 0000
 00D0 = 00130
 000C = 00012
+---------------------------------------------------------
+STAGE 2: Allowed/ UP ports / To make root port
+Root port is decided based on the calculated cost, the device which has lowest cost of route till root bridge will become the root port
 
-STAGE 2 )root port kon banega (   COST ) 
-STAGE KONSA KONSA PORT CHALU RAHEGA WHICH PORT WILL BE UP 
+root port condition - forwarding 
+------------------------------STAGE 2nd END -------------------------
 
-ROOT BRIDGE  designated port FORWARD DATA
-root port rp-fw  forwarding 
-cost calculated kar k root port kon banega decide  kiya jata ta hai 
-STAGE 2nd END 
-
-DP PORT AND ROOT PORT MILNE K BAAD KHATAM STAGE 2 
-----------------------------------------
-
-
-STAGE 3nd BLOCK PORT /ALT
-KONSA KONSA PORT FREE HAI ABHI 
-dono port useless  hoga tho election hoga 
-agar kuch kaam nhi hai tho block kardo 
-
+STAGE 3rd:  BLOCK PORT /ALT
+Election will happen on remaining ports, based on STP priority number and MAC Address
 
 SAME CONCEPT 
 STP PRI LOWEST 
 BASE MAC LOWEST 
 
-BLOCK JO HAR JATA HA
+BLOCK the port which losses the election
 
-COMMAND 
-
+COMMAND
 HOW TO SET ROOT BRIDGE MANUALLLY 
 SPANNING-TREE VLAN 1 PRIORITY 100  ENTER 
 ERROR 
