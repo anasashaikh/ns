@@ -141,6 +141,13 @@ ip routing
 interface vlan 200                  //create a logical vlan interface which will be the gateway for that vlan hosts.
 ip address 192.168.0.1 255.255.255.0
 ---------------------------------------------STP----------------------------------------------------------------------
+STP
+RSTP 
+PVSTP
+R-PVSTP
+
+RSTP - works in other vendors
+R PVSTP - works in cisco device
 Control interfaces of Switch, Break the loop
 
 STP SPANING TREE PROTOCOL   INVENTED BY (RADIA PERLMAN ) OPEN SOURCE 
