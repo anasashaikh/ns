@@ -466,14 +466,18 @@ DNS - Domain Name System Conf
 
 ------------------------------------------------------------------------------------------------NTP NETWORK TIME PROTOCOL--------------------------------------------------------------------------------------------
 
-# CLOCK SET 15:43:00 1 JUNE 2025
-# SHOW CLOCK 
-CONIFG # CLOCK TIMEZONE IST +5 30   TIME ZONE IST
-CONFIG # NTP MASTER 1 <---MAIN NTP SERVER 
+# CLOCK SET 15:43:00 1 JUNE 2025			//TO SET TIME MANUALLY
+# SHOW CLOCK 								//TO SEE THE CLOCK MANUALLY
+# CLOCK TIMEZONE IST +5 30 					//TO SET TIME AUTOMATICALLY AS PER TIME ZONES
 
-CONFIG : NTP SERVER IP
-CONFIG : DO  SHOW NTP STATUS 
-CONFIG : DO SHOW NTP ASSOCIATIONS
+NTP SERVER CONFIGURATION 
+# NTP MASTER 1(STRATUM NUMBER)				//CMD TO CREATE NTP SERVER, STRATUM NUMBER IS THE PRIORITY
+WHEN WE HAVE MULTIPLE NTP SERVERS WE CAN GIVE STRATUM NUMBER 2 TO BACKUP NTP SERVER
+
+CONFIG FOR CLIENT TO SHOW THEIR NTP SERVER
+#NTP SERVER IP
+#DO SHOW NTP STATUS 				//TO CHECK IF CLIENT IS SYNCED WITH THE NTP SERVER.
+#DO SHOW NTP ASSOCIATIONS
 
 
 
@@ -491,8 +495,8 @@ UPD REQ TIME=?		|					|	UPD RES= 16.15.15	|
 
 
 ------------------------------------------------------------------------------------------------NTP END ------------------------------------------------------------------------------------------------------------------
+-------------------------------------------------------------------------ACL---------------------------------------------
 ACL in Router. ACL - to control access of device in a network
-
 
 When we do ACL in router it becomes Security device. Usually we do ACL in Edge router.
 
