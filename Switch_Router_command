@@ -483,7 +483,9 @@ CONFIG FOR CLIENT TO SHOW THEIR NTP SERVER
 #DO SHOW NTP STATUS 				//TO CHECK IF CLIENT IS SYNCED WITH THE NTP SERVER.
 #DO SHOW NTP ASSOCIATIONS
 
-
+Authentication in NTP (same commands for server and client)
+#ntp authentication-key1 md5 ccn
+#ntp authenticate
 
 
 REQ									RES
