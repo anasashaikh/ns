@@ -50,6 +50,10 @@ set enc-algorithm [high-med | high | low ]
 set reliable enable 
 end
 
+Configure loggin options (store and upload)
+#configure log fortianalyzer setting
+  set upload option[store-and-upload | realtime/1-minute/5-minute]
+
 ---------------------------------------View logs in CLI--------------------------------
 #execute log filter
 #execute log display
